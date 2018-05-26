@@ -1,0 +1,1461 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Credit\_Risk\_Modeling}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{Invoke Packages}\label{invoke-packages}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+          \PY{k+kn}{from} \PY{n+nn}{mlxtend}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}predict}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{classification\PYZus{}report}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsubsection{Reading dataframe and clearning the
+noise}\label{reading-dataframe-and-clearning-the-noise}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./databank/loans\PYZus{}2007.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{low\PYZus{}memory} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Removing rows with duplicate data}
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Display first row of  the dataframe}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Display dataframe size}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Total number of features : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 42538 entries, 0 to 42537
+Data columns (total 52 columns):
+id                            42538 non-null object
+member\_id                     42535 non-null float64
+loan\_amnt                     42535 non-null float64
+funded\_amnt                   42535 non-null float64
+funded\_amnt\_inv               42535 non-null float64
+term                          42535 non-null object
+int\_rate                      42535 non-null object
+installment                   42535 non-null float64
+grade                         42535 non-null object
+sub\_grade                     42535 non-null object
+emp\_title                     39909 non-null object
+emp\_length                    41423 non-null object
+home\_ownership                42535 non-null object
+annual\_inc                    42531 non-null float64
+verification\_status           42535 non-null object
+issue\_d                       42535 non-null object
+loan\_status                   42535 non-null object
+pymnt\_plan                    42535 non-null object
+purpose                       42535 non-null object
+title                         42522 non-null object
+zip\_code                      42535 non-null object
+addr\_state                    42535 non-null object
+dti                           42535 non-null float64
+delinq\_2yrs                   42506 non-null float64
+earliest\_cr\_line              42506 non-null object
+inq\_last\_6mths                42506 non-null float64
+open\_acc                      42506 non-null float64
+pub\_rec                       42506 non-null float64
+revol\_bal                     42535 non-null float64
+revol\_util                    42445 non-null object
+total\_acc                     42506 non-null float64
+initial\_list\_status           42535 non-null object
+out\_prncp                     42535 non-null float64
+out\_prncp\_inv                 42535 non-null float64
+total\_pymnt                   42535 non-null float64
+total\_pymnt\_inv               42535 non-null float64
+total\_rec\_prncp               42535 non-null float64
+total\_rec\_int                 42535 non-null float64
+total\_rec\_late\_fee            42535 non-null float64
+recoveries                    42535 non-null float64
+collection\_recovery\_fee       42535 non-null float64
+last\_pymnt\_d                  42452 non-null object
+last\_pymnt\_amnt               42535 non-null float64
+last\_credit\_pull\_d            42531 non-null object
+collections\_12\_mths\_ex\_med    42390 non-null float64
+policy\_code                   42535 non-null float64
+application\_type              42535 non-null object
+acc\_now\_delinq                42506 non-null float64
+chargeoff\_within\_12\_mths      42390 non-null float64
+delinq\_amnt                   42506 non-null float64
+pub\_rec\_bankruptcies          41170 non-null float64
+tax\_liens                     42430 non-null float64
+dtypes: float64(30), object(22)
+memory usage: 17.2+ MB
+None
+
+Total number of features :  52
+
+    \end{Verbatim}
+
+    \subsubsection{Cleaning dataframe by columns carrying irrelevant
+information}\label{cleaning-dataframe-by-columns-carrying-irrelevant-information}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{member\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{funded\PYZus{}amnt\PYZus{}inv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sub\PYZus{}grade}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}  
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{issue\PYZus{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{zip\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{out\PYZus{}prncp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{out\PYZus{}prncp\PYZus{}inv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}pymnt\PYZus{}inv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}prncp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}int}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rec\PYZus{}late\PYZus{}fee}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recoveries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{collection\PYZus{}recovery\PYZus{}fee}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last\PYZus{}pymnt\PYZus{}d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last\PYZus{}pymnt\PYZus{}amnt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:} 32
+\end{Verbatim}
+            
+    \subsubsection{Selecting Target Column}\label{selecting-target-column}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{c+c1}{\PYZsh{} Selecting \PYZdq{}loan\PYZus{}status\PYZdq{} as a target column}
+          \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:} Fully Paid                                             33136
+          Charged Off                                             5634
+          Does not meet the credit policy. Status:Fully Paid      1988
+          Current                                                  961
+          Does not meet the credit policy. Status:Charged Off      761
+          Late (31-120 days)                                        24
+          In Grace Period                                           20
+          Late (16-30 days)                                          8
+          Default                                                    3
+          Name: loan\_status, dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Cleaning the target
+column}\label{cleaning-the-target-column}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{} Only first two values above in \PYZdq{}Load\PYZus{}Status\PYZdq{} are found to be useful for our modeling.}
+          \PY{n}{keep} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fully Paid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Charged Off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{map\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fully Paid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Charged Off}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}
+          
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{n}{keep}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PYZbs{}
+                                                                            \PY{o}{==} \PY{n}{keep}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+          \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{map\PYZus{}dict}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}152}]:} array([1, 0], dtype=int64)
+\end{Verbatim}
+            
+    \subsubsection{Removing the columns with single
+value}\label{removing-the-columns-with-single-value}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{c+c1}{\PYZsh{} Since single valued columns carry no useful information for credibility evaluation purpose.}
+          \PY{n}{drop\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+              \PY{n}{current} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+              \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{current}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                  \PY{n}{drop\PYZus{}columns}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+          
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{drop\PYZus{}columns}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}153}]:} Index(['loan\_amnt', 'term', 'int\_rate', 'installment', 'emp\_length',
+                 'home\_ownership', 'annual\_inc', 'verification\_status', 'loan\_status',
+                 'purpose', 'title', 'addr\_state', 'dti', 'delinq\_2yrs',
+                 'earliest\_cr\_line', 'inq\_last\_6mths', 'open\_acc', 'pub\_rec',
+                 'revol\_bal', 'revol\_util', 'total\_acc', 'last\_credit\_pull\_d',
+                 'pub\_rec\_bankruptcies'],
+                dtype='object')
+\end{Verbatim}
+            
+    \subsubsection{Checking the dataframe for null
+values}\label{checking-the-dataframe-for-null-values}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{c+c1}{\PYZsh{} Display list of columns carrying null values (in descending order)}
+          \PY{n}{null\PYZus{}counts} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{null\PYZus{}counts}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:} emp\_length              1036
+          pub\_rec\_bankruptcies     697
+          revol\_util                50
+          title                     11
+          last\_credit\_pull\_d         2
+          purpose                    0
+          term                       0
+          int\_rate                   0
+          installment                0
+          home\_ownership             0
+          dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Verifying the null values
+proportion}\label{verifying-the-null-values-proportion}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{c+c1}{\PYZsh{} Show columns with number of null values as percentage of total training examples}
+          \PY{c+c1}{\PYZsh{} (in descending order) }
+          \PY{n}{null\PYZus{}percent} \PY{o}{=} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}
+          \PY{n}{null\PYZus{}percent}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:} emp\_length              2.672169
+          pub\_rec\_bankruptcies    1.797782
+          revol\_util              0.128966
+          title                   0.028372
+          last\_credit\_pull\_d      0.005159
+          dtype: float64
+\end{Verbatim}
+            
+    Consider clearning columns with more less 1\% NULL value while removing
+the columns with above 1\% NULL values.
+
+    \subsubsection{Further Cleaning/Removing the
+dataframe}\label{further-cleaningremoving-the-dataframe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pub\PYZus{}rec\PYZus{}bankruptcies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revol\PYZus{}util}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}credit\PYZus{}pull\PYZus{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}  
+                                         \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total NaN values in the dataframe: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pub\PYZus{}rec\PYZus{}bankruptcies}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{loans\PYZus{}2007}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total NaN values in the dataframe:  1032
+False
+
+    \end{Verbatim}
+
+    \subsubsection{Review the columns that carry object type
+data}\label{review-the-columns-that-carry-object-type-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{object\PYZus{}columns\PYZus{}df} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{object}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{object\PYZus{}columns\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}157}]:} term                     36 months
+          int\_rate                    10.65\%
+          emp\_length               10+ years
+          home\_ownership                RENT
+          verification\_status       Verified
+          purpose                credit\_card
+          title                     Computer
+          addr\_state                      AZ
+          earliest\_cr\_line          Jan-1985
+          revol\_util                   83.7\%
+          last\_credit\_pull\_d        Jun-2016
+          Name: 0, dtype: object
+\end{Verbatim}
+            
+    The following columns seem to carry categorical data that could be
+helpful for our regression analysis later:
+
+\begin{itemize}
+\tightlist
+\item
+  term
+\item
+  emp\_length
+\item
+  home\_ownership
+\item
+  verification\_status
+\item
+  purpose
+\item
+  title
+\end{itemize}
+
+The above results show that the following columns carry type of
+information that we can convert into numerical type for further
+analysis:
+
+\begin{itemize}
+\tightlist
+\item
+  int\_rate
+\item
+  revol\_util
+\end{itemize}
+
+The remaining table seem to be not much useful and should be drop for
+our data frame. They are:
+
+\begin{itemize}
+\tightlist
+\item
+  addr\_state
+\item
+  earliest\_cr\_line
+\item
+  last\_credit\_pull\_d
+\end{itemize}
+
+    \subsubsection{Verify the columns with categorical
+data}\label{verify-the-columns-with-categorical-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{term}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emp\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}ownership}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{verification\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purpose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Unique Counts for }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{i} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ :}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{object\PYZus{}columns\PYZus{}df}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Unique Counts for term :
+  36 months    29040
+ 60 months     9667
+Name: term, dtype: int64
+
+Unique Counts for emp\_length :
+ 10+ years    8545
+< 1 year     4513
+2 years      4303
+3 years      4022
+4 years      3353
+5 years      3202
+1 year       3176
+6 years      2177
+7 years      1714
+8 years      1442
+9 years      1228
+Name: emp\_length, dtype: int64
+
+Unique Counts for home\_ownership :
+ RENT        18513
+MORTGAGE    17111
+OWN          2984
+OTHER          96
+NONE            3
+Name: home\_ownership, dtype: int64
+
+Unique Counts for verification\_status :
+ Not Verified       16696
+Verified           12289
+Source Verified     9722
+Name: verification\_status, dtype: int64
+
+Unique Counts for purpose :
+ debt\_consolidation    18130
+credit\_card            5039
+other                  3864
+home\_improvement       2897
+major\_purchase         2154
+small\_business         1762
+car                    1510
+wedding                 929
+medical                 680
+moving                  576
+vacation                375
+house                   369
+educational             320
+renewable\_energy        102
+Name: purpose, dtype: int64
+
+Unique Counts for title :
+ Debt Consolidation                                       2104
+Debt Consolidation Loan                                  1632
+Personal Loan                                             642
+Consolidation                                             494
+debt consolidation                                        485
+Credit Card Consolidation                                 353
+Home Improvement                                          346
+Debt consolidation                                        324
+Small Business Loan                                       310
+Credit Card Loan                                          305
+Personal                                                  302
+Consolidation Loan                                        251
+Home Improvement Loan                                     234
+personal loan                                             227
+personal                                                  211
+Loan                                                      208
+Wedding Loan                                              201
+Car Loan                                                  195
+consolidation                                             193
+Other Loan                                                181
+Credit Card Payoff                                        150
+Wedding                                                   149
+Credit Card Refinance                                     143
+Major Purchase Loan                                       139
+Consolidate                                               125
+Medical                                                   118
+Credit Card                                               115
+home improvement                                          107
+My Loan                                                    92
+Credit Cards                                               91
+                                                         {\ldots} 
+money honey                                                 1
+Working capital business loan                               1
+Graduation/Travel Expenses                                  1
+Home Improvements                                           1
+Making ends meet                                            1
+amexloan                                                    1
+HudsonKK                                                    1
+New kitchen                                                 1
+Small business loan                                         1
+COSMETIC                                                    1
+Dept Consolidation Loan Success                             1
+Freash Start!                                               1
+Triathlete                                                  1
+Hearing Aids                                                1
+business plan debt consultation                             1
+Condo Renovation Loan                                       1
+pay off high interest debt                                  1
+CREATING FINACIAL INDEPENDENCE FOR MY CHILDREN AND ME       1
+Home sale buyout                                            1
+KDC\_Loan123                                                 1
+Car loan and pay off my family                              1
+Credit Card Relieve                                         1
+Family Support                                              1
+Catrin's wish                                               1
+Furniture                                                   1
+Monty                                                       1
+Discover payoff                                             1
+New Job Relocate Debt Until IL Home Sell                    1
+missvi1                                                     1
+The consolidator                                            1
+Name: title, Length: 19331, dtype: int64
+
+    \end{Verbatim}
+
+    It appears that column 'purpose' and 'title' carry overlapping
+information. However, considering the duplication of loan categories
+under the 'title' column, let's keep the 'purpose' column and drop the
+'title' one.
+
+Column 'emp\_length' carries multiple category data.
+
+    \subsubsection{Drop less useful columns with duplicate/overlapping
+data}\label{drop-less-useful-columns-with-duplicateoverlapping-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{addr\PYZus{}state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{earliest\PYZus{}cr\PYZus{}line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}credit\PYZus{}pull\PYZus{}d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Assign data variables to
+columns}\label{assign-data-variables-to-columns}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{cat\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{home\PYZus{}ownership}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{verification\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purpose}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{term}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{loans\PYZus{}2007\PYZus{}dummies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{n}{cat\PYZus{}columns}\PY{p}{]}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{loans\PYZus{}2007}\PY{p}{,} \PY{n}{loans\PYZus{}2007\PYZus{}dummies}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Removinng the original non\PYZhy{}dummy columns }
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{cat\PYZus{}columns}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} Index(['loan\_amnt', 'int\_rate', 'installment', 'emp\_length', 'annual\_inc',
+                 'loan\_status', 'dti', 'delinq\_2yrs', 'inq\_last\_6mths', 'open\_acc',
+                 'pub\_rec', 'revol\_bal', 'revol\_util', 'total\_acc',
+                 'home\_ownership\_MORTGAGE', 'home\_ownership\_NONE',
+                 'home\_ownership\_OTHER', 'home\_ownership\_OWN', 'home\_ownership\_RENT',
+                 'verification\_status\_Not Verified',
+                 'verification\_status\_Source Verified', 'verification\_status\_Verified',
+                 'purpose\_car', 'purpose\_credit\_card', 'purpose\_debt\_consolidation',
+                 'purpose\_educational', 'purpose\_home\_improvement', 'purpose\_house',
+                 'purpose\_major\_purchase', 'purpose\_medical', 'purpose\_moving',
+                 'purpose\_other', 'purpose\_renewable\_energy', 'purpose\_small\_business',
+                 'purpose\_vacation', 'purpose\_wedding', 'term\_ 36 months',
+                 'term\_ 60 months'],
+                dtype='object')
+\end{Verbatim}
+            
+    \subsubsection{Mapping column with multiple category
+data}\label{mapping-column-with-multiple-category-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{mapping\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}
+              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{emp\PYZus{}length}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{10+ years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{10}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{9 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{9}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{8 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{7 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{7}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{6 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{6}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{5 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{5}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2 years}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1 year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{} 1 year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+                  \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{:} \PY{l+m+mi}{0}
+              \PY{p}{\PYZcb{}}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{n}{loans\PYZus{}2007} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{mapping\PYZus{}dict}\PY{p}{)}
+          \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{emp\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}161}]:} array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10], dtype=int64)
+\end{Verbatim}
+            
+    \subsubsection{Convert Columns String type Numeric Data to Real
+Numbers}\label{convert-columns-string-type-numeric-data-to-real-numbers}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int\PYZus{}rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{rstrip}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revol\PYZus{}util}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{revol\PYZus{}util}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{rstrip}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Preserving completely cleansed dataframe in .csv
+format}\label{preserving-completely-cleansed-dataframe-in-.csv-format}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cleaned\PYZus{}loans\PYZus{}2007.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 38707 entries, 0 to 39785
+Data columns (total 38 columns):
+loan\_amnt                              38707 non-null float64
+int\_rate                               38707 non-null float64
+installment                            38707 non-null float64
+emp\_length                             38707 non-null int64
+annual\_inc                             38707 non-null float64
+loan\_status                            38707 non-null int64
+dti                                    38707 non-null float64
+delinq\_2yrs                            38707 non-null float64
+inq\_last\_6mths                         38707 non-null float64
+open\_acc                               38707 non-null float64
+pub\_rec                                38707 non-null float64
+revol\_bal                              38707 non-null float64
+revol\_util                             38707 non-null float64
+total\_acc                              38707 non-null float64
+home\_ownership\_MORTGAGE                38707 non-null uint8
+home\_ownership\_NONE                    38707 non-null uint8
+home\_ownership\_OTHER                   38707 non-null uint8
+home\_ownership\_OWN                     38707 non-null uint8
+home\_ownership\_RENT                    38707 non-null uint8
+verification\_status\_Not Verified       38707 non-null uint8
+verification\_status\_Source Verified    38707 non-null uint8
+verification\_status\_Verified           38707 non-null uint8
+purpose\_car                            38707 non-null uint8
+purpose\_credit\_card                    38707 non-null uint8
+purpose\_debt\_consolidation             38707 non-null uint8
+purpose\_educational                    38707 non-null uint8
+purpose\_home\_improvement               38707 non-null uint8
+purpose\_house                          38707 non-null uint8
+purpose\_major\_purchase                 38707 non-null uint8
+purpose\_medical                        38707 non-null uint8
+purpose\_moving                         38707 non-null uint8
+purpose\_other                          38707 non-null uint8
+purpose\_renewable\_energy               38707 non-null uint8
+purpose\_small\_business                 38707 non-null uint8
+purpose\_vacation                       38707 non-null uint8
+purpose\_wedding                        38707 non-null uint8
+term\_ 36 months                        38707 non-null uint8
+term\_ 60 months                        38707 non-null uint8
+dtypes: float64(12), int64(2), uint8(24)
+memory usage: 5.3 MB
+
+    \end{Verbatim}
+
+    \subsubsection{Finalizing the feature
+columns}\label{finalizing-the-feature-columns}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{features} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \subsubsection{Evaluating the data
+skewness}\label{evaluating-the-data-skewness}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{target\PYZus{}vals} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{target\PYZus{}vals}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The binary data ratio = 1 :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{target\PYZus{}vals}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n}{target\PYZus{}vals}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{loans\PYZus{}2007}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1    33092
+0     5615
+Name: loan\_status, dtype: int64
+The binary data ratio = 1 : 5.893499554764025
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}165}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0xce180b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    This clearly indicates that our data is skewed. 
+
+Let's consider a logistic regression model that predict "1" as loan would be pay-off on time and "0" as loan would not be pay-off on time.
+
+Considering the conservative investors approach:
+
+* We must emphasize an algorithm that can avoid predicting "False Positive" which can suggest them any risky investment as a safe option. This may, otherwise, cause severe business losses.
+
+* Similarly, it is acceptable that the algorithm is little lenient with predicting "False Negative" so that some safe investments could end up with wrong rejections. This may cause slip of some safe business opportunity.
+    \subsubsection{Develop Logistic Regression Model and Fit
+Verification}\label{develop-logistic-regression-model-and-fit-verification}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{c+c1}{\PYZsh{} split train/test/cv as 60/20/20}
+          \PY{n}{train\PYZus{}set} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{23224}\PY{p}{]}
+          \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{23225}\PY{p}{:}\PY{l+m+mi}{30966}\PY{p}{]}
+          \PY{n}{cross\PYZus{}val} \PY{o}{=} \PY{n}{loans\PYZus{}2007}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{30967}\PY{p}{:}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Find the logistic regression model using sklearn}
+          \PY{n}{logistic\PYZus{}model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}test} \PY{o}{=} \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}test} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}test}\PY{p}{,} \PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mse\PYZus{}vals\PYZus{}test}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}166}]:} 0.1331869267536494
+\end{Verbatim}
+            
+    \subsubsection{Verifying the Logistic Reg Model over CV
+Set}\label{verifying-the-logistic-reg-model-over-cv-set}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{c+c1}{\PYZsh{} Find the MSE for CV}
+          
+          \PY{n}{logistic\PYZus{}model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}cv} \PY{o}{=} \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}cv} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}cv}\PY{p}{,} \PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mse\PYZus{}vals\PYZus{}cv}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}167}]:} 0.13217054263565892
+\end{Verbatim}
+            
+    \subsubsection{Checking the Model Generalization using Another
+Classifier}\label{checking-the-model-generalization-using-another-classifier}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{c+c1}{\PYZsh{} Check for model generalization using scikit\PYZhy{}learn package and carry out K\PYZhy{}Fold }
+          \PY{c+c1}{\PYZsh{} Cross Validation}
+          
+          \PY{n}{logistic\PYZus{}model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}tot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}predict}\PY{p}{(}\PY{n}{logistic\PYZus{}model}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} 
+                                                        \PY{n}{y}\PY{o}{=}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}tot} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}tot}\PY{p}{,} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mse\PYZus{}vals\PYZus{}tot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}168}]:} 0.14573591340067688
+\end{Verbatim}
+            
+    The error results for model predictibility over test set and
+cross-validation set using two different classifier. This shows a better
+model generalization for predictibility over outside data.
+
+    \subsubsection{Check Prediction Integrity using Evaluation
+Matrix}\label{check-prediction-integrity-using-evaluation-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          
+          \PY{c+c1}{\PYZsh{} For Logistic Reg Classifier over Test Set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}test} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}test} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}test} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}test} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}test} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}test} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}test} \PY{o}{*} \PY{n}{recall\PYZus{}test} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}test} \PY{o}{+} \PY{n}{recall\PYZus{}test}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}test}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}test}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}test}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision over Test Set: 0.8683084899546338
+Recall over Test Set: 0.9977658623771224
+Accuracy over Test Set: 0.8668130732463506
+FPR over Test Set: 0.9892891918208374
+TPR over Test Set: 0.9977658623771224
+F1 Score over Test Set: 0.9285466768313811
+             precision    recall  f1-score   support
+
+          0       0.42      0.01      0.02      1027
+          1       0.87      1.00      0.93      6714
+
+avg / total       0.81      0.87      0.81      7741
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          
+          \PY{c+c1}{\PYZsh{} For Logistic Reg Classifier over Cross Validation Set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}cv} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}cv} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}cv} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}cv} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}cv} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}cv} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}cv} \PY{o}{*} \PY{n}{recall\PYZus{}cv} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}cv} \PY{o}{+} \PY{n}{recall\PYZus{}cv}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}cv}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}cv}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}cv}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}cv}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}cv}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}cv}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}cv}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}cv}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision over Cross Validation Set: 0.8683563946721842
+Recall over Cross Validation Set: 0.9992559523809523
+Accuracy over Cross Validation Set: 0.8678294573643411
+FPR over Cross Validation Set: 0.9980392156862745
+TPR over Cross Validation Set: 0.9992559523809523
+F1 Score over Cross Validation Set: 0.9292188472981389
+             precision    recall  f1-score   support
+
+          0       0.29      0.00      0.00      1020
+          1       0.87      1.00      0.93      6720
+
+avg / total       0.79      0.87      0.81      7740
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}171}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          
+          \PY{c+c1}{\PYZsh{} For K\PYZhy{}Fold Cross Validation Classifier over entire data set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}tot} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}tot} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}tot} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}tot} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}tot} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}tot} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}tot} \PY{o}{*} \PY{n}{recall\PYZus{}tot} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}tot} \PY{o}{+} \PY{n}{recall\PYZus{}tot}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}tot}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}tot}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}tot}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}tot}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}tot}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score by K\PYZhy{}Fold Classify:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}tot}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}tot}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}tot}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision by K-Fold Classify: 0.8556253660614451
+Recall by K-Fold Classify: 0.9982295937383526
+Accuracy by K-Fold Classify: 0.8306766217996745
+FPR by K-Fold Classify: 0.9974250505793636
+TPR by K-Fold Classify: 0.9982295937383526
+F1 Score by K-Fold Classify: 0.9214427019123255
+             precision    recall  f1-score   support
+
+          0       0.32      0.00      0.01      5615
+          1       0.86      1.00      0.92     33092
+
+avg / total       0.78      0.85      0.79     38707
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Results}\label{results}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}172}]:} \PY{n}{output\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cross Validation Set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K\PYZhy{}Fold Classify}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{output\PYZus{}index} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{precision}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{recall}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fpr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tpr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1\PYZus{}score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{output} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{output\PYZus{}index}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{n}{output\PYZus{}cols}\PY{p}{)}
+          
+          \PY{n}{output}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}test}\PY{p}{,} \PY{n}{recall\PYZus{}test}\PY{p}{,} \PY{n}{accuracy\PYZus{}test}\PY{p}{,} \PY{n}{fpr\PYZus{}test}\PY{p}{,} \PY{n}{tpr\PYZus{}test}\PY{p}{,} 
+                                \PY{n}{F1\PYZus{}score\PYZus{}test}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}test}\PY{p}{]}
+          \PY{n}{output}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cross Validation Set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}cv}\PY{p}{,} \PY{n}{recall\PYZus{}cv}\PY{p}{,} \PY{n}{accuracy\PYZus{}cv}\PY{p}{,} \PY{n}{fpr\PYZus{}cv}\PY{p}{,} \PY{n}{tpr\PYZus{}cv}\PY{p}{,} 
+                                            \PY{n}{F1\PYZus{}score\PYZus{}cv}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}cv}\PY{p}{]}
+          \PY{n}{output}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{K\PYZhy{}Fold Classify}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}tot}\PY{p}{,} \PY{n}{recall\PYZus{}tot}\PY{p}{,} \PY{n}{accuracy\PYZus{}tot}\PY{p}{,} \PY{n}{fpr\PYZus{}tot}\PY{p}{,} \PY{n}{tpr\PYZus{}tot}\PY{p}{,} 
+                                       \PY{n}{F1\PYZus{}score\PYZus{}tot}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}tot}\PY{p}{]}
+          \PY{n}{output}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}172}]:}            Test Set  Cross Validation Set  K-Fold Classify
+          precision  0.868308              0.868356         0.855625
+          recall     0.997766              0.999256         0.998230
+          accuracy   0.866813              0.867829         0.830677
+          fpr        0.989289              0.998039         0.997425
+          tpr        0.997766              0.999256         0.998230
+          F1\_score   0.928547              0.929219         0.921443
+          MSE        0.133187              0.132171         0.145736
+\end{Verbatim}
+            
+    \subsubsection{Results Review}\label{results-review}
+* The precision of 0.5 indicates that only 50% of total positives as predicted by the model are indeed "True Positive". In other words, the algorithm fails to predict "True Negative" more than half times (50%) and predict "False Positive" instead. Only 50% of the positively predicted cases are really genuine where the loans would be pay off on time. This pose highly risky predictive environment to take critical investment decisions. 
+
+* The prediction algorithm seems to be biased towards the positive outcome. This also gets reflected in the high recall value. This could not gain confident to make business/investment decision by the conservative investors.
+
+* High value of FPR shows the positive bias of the predictive algorithm. The 99% value of FPR is indicative of high volume of "False Positive". This pose high threat to make right selection of loan funding decision that can be pay off on time.
+    \subsubsection{Revise Model}\label{revise-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{c+c1}{\PYZsh{} Need to reduce \PYZdq{}False Positive\PYZdq{} to improve predictive reliability}
+          \PY{c+c1}{\PYZsh{} To enhance conservative predictive outcome, let\PYZsq{}s set\PYZhy{}up penalty for wrongly label \PYZdq{}1\PYZdq{}}
+          \PY{n}{penalty} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}
+          \PY{c+c1}{\PYZsh{} Set up Logistic regression model}
+          \PY{n}{logistic\PYZus{}model} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{class\PYZus{}weight} \PY{o}{=} \PY{n}{penalty}\PY{p}{)}
+          \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mse\PYZus{}vals\PYZus{}test\PYZus{}rev}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}173}]:} 0.0
+\end{Verbatim}
+            
+    \subsubsection{Re-verify the Logistic Reg Revised
+Model}\label{re-verify-the-logistic-reg-revised-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{c+c1}{\PYZsh{} Find the MSE for CV}
+          
+          \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{logistic\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{mse\PYZus{}vals\PYZus{}cv\PYZus{}rev}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}174}]:} 0.0
+\end{Verbatim}
+            
+    \subsubsection{Re-Check (Manually) the Revised Model Generalization
+using Class Weights
+Classifier}\label{re-check-manually-the-revised-model-generalization-using-class-weights-classifier}
+In order to accomplish splitting the skewed data appropriately into partitions, every class should be applied with different weight so that all partitions are eventually left out for testing. We have data skewed in the order of 1:5.89. It should be noted that RandomForestClassifier suites to allow for class weighting.
+
+We should manage the class weights manually to find a better balance between the "False Positives" and "False Negatives". The F1 score is a good indicator of tradeoff between the precision and recall. 
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}175}]:} \PY{c+c1}{\PYZsh{} Check for model generalization using scikit\PYZhy{}learn GridSearchCV classifier }
+          
+          \PY{n}{wts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.95}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Initialize the classifier (presumming 3\PYZhy{}Folds will provide a reasonable balance between}
+          \PY{c+c1}{\PYZsh{} the accuracy and computation time)}
+          \PY{n}{grdcv} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}
+              \PY{n}{estimator}\PY{o}{=}\PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{p}{\PYZob{}}
+                          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class\PYZus{}weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:} \PY{n}{x}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:} \PY{l+m+mf}{1.0}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{\PYZcb{}} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{wts}\PY{p}{]}
+                          \PY{p}{\PYZcb{}}\PY{p}{,}
+              \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+          
+          \PY{n}{grd\PYZus{}rslt} \PY{o}{=} \PY{n}{grdcv}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{loans\PYZus{}2007}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best parameters : }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{grd\PYZus{}rslt}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot the weights vs F1\PYZus{}score}
+          \PY{n}{df\PYZus{}wt} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{grd\PYZus{}rslt}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean\PYZus{}test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{wts} \PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}wt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Initializing the Logistic Regression Cross Validation}
+          \PY{n}{logistic\PYZus{}model\PYZus{}rev} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{grd\PYZus{}rslt}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}\PY{p}{)}
+          \PY{n}{logistic\PYZus{}model\PYZus{}rev}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{predictions\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{logistic\PYZus{}model\PYZus{}rev}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{n}{features}\PY{p}{]}\PY{p}{)}
+          \PY{n}{mse\PYZus{}vals\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE for GridSearchCV Cross\PYZhy{}Validation Check =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best parameters : \{'class\_weight': \{0: 0.7605263157894736, 1: 0.2394736842105264\}\}
+MSE for GridSearchCV Cross-Validation Check = 0.0
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Re-Check Prediction Integrity using Evaluation
+Matrix}\label{re-check-prediction-integrity-using-evaluation-matrix}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}176}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          \PY{c+c1}{\PYZsh{} For Logistic Reg Classifier over Test Set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}test\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}test\PYZus{}rev} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}test\PYZus{}rev} \PY{o}{*} \PY{n}{recall\PYZus{}test\PYZus{}rev} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}test\PYZus{}rev} \PY{o}{+} 
+                                                                          \PY{n}{recall\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score over Test Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}test\PYZus{}rev}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}test\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision over Test Set: 1.0
+Recall over Test Set: 1.0
+Accuracy over Test Set: 1.0
+FPR over Test Set: 0.0
+TPR over Test Set: 1.0
+F1 Score over Test Set: 1.0
+             precision    recall  f1-score   support
+
+          0       1.00      1.00      1.00      1027
+          1       1.00      1.00      1.00      6714
+
+avg / total       1.00      1.00      1.00      7741
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}177}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          \PY{c+c1}{\PYZsh{} For Logistic Reg Classifier over Cross Validation Set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}cv\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}cv\PYZus{}rev} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}cv\PYZus{}rev} \PY{o}{*} \PY{n}{recall\PYZus{}cv\PYZus{}rev} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}cv\PYZus{}rev} \PY{o}{+} \PY{n}{recall\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score over Cross Validation Set:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}cv\PYZus{}rev}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}cv\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision over Cross Validation Set: 1.0
+Recall over Cross Validation Set: 1.0
+Accuracy over Cross Validation Set: 1.0
+FPR over Cross Validation Set: 0.0
+TPR over Cross Validation Set: 1.0
+F1 Score over Cross Validation Set: 1.0
+             precision    recall  f1-score   support
+
+          0       1.00      1.00      1.00      1020
+          1       1.00      1.00      1.00      6720
+
+avg / total       1.00      1.00      1.00      7740
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}178}]:} \PY{c+c1}{\PYZsh{} Calc for TP/FP/TN/FN}
+          \PY{c+c1}{\PYZsh{} For GridSearchCV Classifier with Logistic Reg over the cross validation data set}
+          
+          \PY{n}{tp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{tn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fp} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fn} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{[}\PY{p}{(}\PY{n}{predictions\PYZus{}tot\PYZus{}rev} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{precision\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fp}\PY{p}{)}
+          \PY{n}{recall\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{accuracy\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{tn}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{fpr\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{fp} \PY{o}{/} \PY{p}{(}\PY{n}{fp} \PY{o}{+} \PY{n}{tn}\PY{p}{)}
+          \PY{n}{tpr\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{n}{tp} \PY{o}{/} \PY{p}{(}\PY{n}{tp} \PY{o}{+} \PY{n}{fn}\PY{p}{)}
+          \PY{n}{F1\PYZus{}score\PYZus{}tot\PYZus{}rev} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{precision\PYZus{}tot\PYZus{}rev} \PY{o}{*} \PY{n}{recall\PYZus{}tot\PYZus{}rev} \PY{o}{/} \PY{p}{(}\PY{n}{precision\PYZus{}tot\PYZus{}rev} \PY{o}{+} 
+                                                                       \PY{n}{recall\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision by GridSearchCV Classifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{precision\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall by GridSearchCV Classifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{recall\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy by GridSearchCVClassifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{accuracy\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FPR by GridSearchCV Classifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fpr\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TPR by GridSearchCV Classifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{tpr\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 Score by GridSearchCV Classifier:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}tot\PYZus{}rev}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Verify the calc using sklearn function}
+          \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loan\PYZus{}status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{cross\PYZus{}val}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loan\PYZus{}status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{predictions\PYZus{}tot\PYZus{}rev}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precision by GridSearchCV Classifier: 1.0
+Recall by GridSearchCV Classifier: 1.0
+Accuracy by GridSearchCVClassifier: 1.0
+FPR by GridSearchCV Classifier: 0.0
+TPR by GridSearchCV Classifier: 1.0
+F1 Score by GridSearchCV Classifier: 1.0
+             precision    recall  f1-score   support
+
+          0       1.00      1.00      1.00      1020
+          1       1.00      1.00      1.00      6720
+
+avg / total       1.00      1.00      1.00      7740
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Revised Model Results
+Summary}\label{revised-model-results-summary}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{n}{output\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cross Validation Set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GridSearch CV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{output\PYZus{}rev} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{output\PYZus{}index}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{n}{output\PYZus{}cols}\PY{p}{)}
+          
+          \PY{n}{output\PYZus{}rev}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{recall\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{accuracy\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{fpr\PYZus{}test\PYZus{}rev}\PY{p}{,} 
+                                    \PY{n}{tpr\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}test\PYZus{}rev}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}test\PYZus{}rev}\PY{p}{]}
+          \PY{n}{output\PYZus{}rev}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cross Validation Set}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{recall\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{accuracy\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{fpr\PYZus{}cv\PYZus{}rev}\PY{p}{,} 
+                                                \PY{n}{tpr\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}cv\PYZus{}rev}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}cv\PYZus{}rev}\PY{p}{]}
+          \PY{n}{output\PYZus{}rev}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GridSearch CV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{precision\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{recall\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{accuracy\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{fpr\PYZus{}tot\PYZus{}rev}\PY{p}{,} 
+                                         \PY{n}{tpr\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{F1\PYZus{}score\PYZus{}tot\PYZus{}rev}\PY{p}{,} \PY{n}{mse\PYZus{}vals\PYZus{}tot\PYZus{}rev}\PY{p}{]}
+          \PY{n}{output\PYZus{}rev}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}179}]:}            Test Set  Cross Validation Set  GridSearch CV
+          precision       1.0                   1.0            1.0
+          recall          1.0                   1.0            1.0
+          accuracy        1.0                   1.0            1.0
+          fpr             0.0                   0.0            0.0
+          tpr             1.0                   1.0            1.0
+          F1\_score        1.0                   1.0            1.0
+          MSE             0.0                   0.0            0.0
+\end{Verbatim}
+            
+    \subsubsection{Conclusion}\label{conclusion}
+* The results above show generalization of the revised model over the unknown data set. 
+
+* Precision value of 1.0 indicates that this model predicts ONLY actual positive examples as positive outcome.
+
+* Recall value of 1.0 is an indication that this model captures ALL positive examples correctly.
+
+* F1-Score is an indicative of perfect 'Precision' and 'Recall' scores.
+
+* The zero value of fpr confirms that the model is absolutely not predicting "False Positive". This confirm the reliability of the algorithm and its alignment with our need for conservative business proposition to avoid any risky investment option. The checks for model predictive behavior above assure this model would recommend only loan options that are safe and will be paid off on time.
+
+* The TPR value of 1.0 is an indicative that this model will show ALL of the safe loan opportunities that will be paid off on time. This will give an utmost confidence to the conservative investors and encourage them to treat any/all of the recommended business opportunity as risk free to do business. 
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
