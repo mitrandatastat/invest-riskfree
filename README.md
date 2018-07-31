@@ -21,7 +21,7 @@ We can highlight the below mentioned goals:
 
 ### Technical Writeup
 
-Please refer to the approprite portion of the portfolio section to read the detailed project write up. 
+Please refer to the approprite portion of the portfolio section to read the [detailed project write up](https://portfolio.mshah.info/risk-free-investment/). 
 
 ### Code Explanation
 
